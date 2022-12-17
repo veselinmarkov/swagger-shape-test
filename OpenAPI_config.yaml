@@ -1,0 +1,59 @@
+openapi: 3.0.3
+info:
+  title: Test swagger cors
+  version: 1.0.11
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+paths:
+  /:
+    get:
+      summary: ''
+      description: ''
+      operationId: base_get
+      parameters:
+      - name: status
+        in: query
+        description: Status values that need to be considered for filter
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          format: int32
+      responses:
+        '200':
+          description: A paged array of pets
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/Hello"
+        default:
+          description: Default error sample response
+  /campaign:
+    get:
+      summary: ''
+      description: ''
+      operationId: get_campaigns
+      responses:
+        default:
+          description: Default error sample response
+components:
+  schemas:
+    Hello:
+      type: object
+      properties:
+        hello:
+          type: array
+          items:
+            type: string
+    
+servers:
+  - url: https://ixkqcqul14.execute-api.eu-central-1.amazonaws.com/api/
+    variables: {}
+  - url: https://bmqeq4y6h0.execute-api.eu-central-1.amazonaws.com/api/
+    variables: {}
